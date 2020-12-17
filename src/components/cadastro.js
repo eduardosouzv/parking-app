@@ -56,7 +56,7 @@ const Cadastro = () => {
 
   function verificaPlaca() {
 
-    var placa = document.getElementById('placa').value
+    var placa = document.getElementById('placa').value;
 
     console.log(placa)
 
