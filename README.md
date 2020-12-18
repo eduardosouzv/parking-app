@@ -1,1 +1,2 @@
-# parking-app
+# parking-app 🚗 
+Inicialmente, *parking-app* originou-se de um trabalho desenvolvido na unidade curricular de ***Lógica de Programação***. No final dessa unidade, o professor nos propôs algumas ideias de projetos reais que poderiam ser feitos em *Pseudocódigo* ou *JavaScript*. Então, eu e mais dois amigos, desenvolvemos essa aplicação em *JavaScript*, porém como não tínhamos tido nenhum contato com a linguagem, o professor nos orientou a fazer ele sendo executado por `alert()` e `prompt()`, tendo seus valores guardados e executando toda a lógica do aplicativo.
