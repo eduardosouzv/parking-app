@@ -21,11 +21,16 @@ const Cadastro = () => {
     toggleVisibleSucess(false)
 
     if (verificaPlaca() && verificaNome() && verificaModelo() && verificaMarca()){
+      var objItemPlaca = document.getElementById('placa').value.toUpperCase()
+      var objItemNome = document.getElementById('nome').value
+      var objItemMarca = document.getElementById('marca').value
+      var objItemModelo = document.getElementById('modelo').value
+
       var carData = {
-        placa: document.getElementById('placa').value,
-        nome: document.getElementById('nome').value,
-        marca: document.getElementById('marca').value,
-        modelo: document.getElementById('modelo').value
+        placa: objItemPlaca,
+        nome: objItemNome,
+        marca: objItemMarca,
+        modelo: objItemModelo
       }
 
       arrayData.push(carData)
@@ -47,8 +52,6 @@ const Cadastro = () => {
         
       }
 
-
-
       return toggleVisibleSucess(true)
 
     }
@@ -56,9 +59,7 @@ const Cadastro = () => {
 
   function verificaPlaca() {
 
-    var placa = document.getElementById('placa').value;
-
-    console.log(placa)
+    var placa = document.getElementById('placa').value.toUpperCase();
 
     function placaExistente() {
 
@@ -75,28 +76,28 @@ const Cadastro = () => {
       }
     }
 
-    
-
     if (placa.length !== 7 ) {
       toggleVisibleError(true)
       return false
     }
 
-    var letrasPlaca = placa.slice(0,3)
-    var numerosPlaca = placa.slice(3,7)
-    
-    if( !isNaN(parseInt(letrasPlaca)) ){
+    var placaSplit = placa.split('')
+
+    if (!isNaN(parseInt(placaSplit[0])) || !isNaN(placaSplit[1]) || !isNaN(placaSplit[2])) {
       toggleVisibleError(true)
       return false
-    } else if( isNaN(parseInt(numerosPlaca)) ){
+    } else if (isNaN( parseInt(placaSplit[3]) ) || isNaN( parseInt(placaSplit[4] )) 
+    || isNaN( parseInt(placaSplit[5]) ) || isNaN( parseInt(placaSplit[6]) ) ) 
+    {
       toggleVisibleError(true)
       return false
-    } else if(placaExistente()){
+    } else if (placaExistente()) {
       toggleVisibleError(true)
       return false
     } else {
       return true
     }
+
   }
   
   function verificaNome() {
@@ -139,7 +140,7 @@ const Cadastro = () => {
             Placa
           </label>
           <div className="col-sm-2">
-            <input type="text" className="form-control" id="placa" placeholder="AAA0000" />
+            <input type="text" className="form-control" id="placa" placeholder="AAA0000" autoComplete="off" />
           </div>
         </div>
 
@@ -148,7 +149,7 @@ const Cadastro = () => {
             Nome
           </label>
           <div className="col-sm-2">
-            <input type="text" className="form-control" id="nome" />
+            <input type="text" className="form-control" id="nome" autoComplete="off" />
           </div>
         </div>
 
@@ -157,7 +158,7 @@ const Cadastro = () => {
             Marca
           </label>
           <div className="col-sm-2">
-            <input type="text" className="form-control" id="marca" />
+            <input type="text" className="form-control" id="marca" autoComplete="off" />
           </div>
         </div>
 
@@ -166,7 +167,7 @@ const Cadastro = () => {
             Modelo
           </label>
           <div className="col-sm-2">
-            <input type="text" className="form-control" id="modelo" />
+            <input type="text" className="form-control" id="modelo" autoComplete="off" />
           </div>
         </div>
 
