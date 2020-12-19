@@ -32,7 +32,9 @@ const Cadastro = () => {
         nome: objItemNome,
         marca: objItemMarca,
         modelo: objItemModelo,
-        horario_entrada: horarioEntrada
+        horario_entrada: horarioEntrada,
+        horario_saida: '',
+        valor_pago: ''
       }
 
       arrayData.push(carData)

@@ -4,6 +4,7 @@ const Saida = () => {
 
   const [errorVisible, toggleVisibleError] = useState(false);
   const [sucessVisible, toggleVisibleSucess] = useState(false);
+  const [value, setValue] = useState(0);
 
   const msgElementError = (
     <div className="alert alert-danger col-md-6 mx-auto" role="alert">Placa não encontrada.</div>
@@ -13,9 +14,23 @@ const Saida = () => {
     <div className="alert alert-success col-md-6 mx-auto" role="alert">Saida Registrada</div>
   );
 
+  const msgElementValue = (
+    <div className="alert alert-secondary col-md-6 mx-auto" role="alert">Valor a ser pago : R$ {value},00</div>
+  );
+
+  function calcValue(h) {
+    var time = Date.parse(h);
+    var currentTime = new Date().getTime();
+    var diff = currentTime - time;
+    var hours = Math.ceil(diff / 1000 / 60 / 60);
+    var valor = hours * 3
+    return valor
+  }
+  
   function buscaPlaca() {
     toggleVisibleSucess(false);
-    toggleVisibleError(false)
+    toggleVisibleError(false);
+    setValue(0);
 
     var placaBuscada = document.getElementById('placa').value.toUpperCase();
     
@@ -25,6 +40,16 @@ const Saida = () => {
 
     for (let i = 0; i < carros.length; i++) {
       if (carros[i].placa === placaBuscada) {
+        var value = calcValue(carros[i].horario_entrada)
+        
+        setValue(value)
+        carros[i].valor_pago = value
+        carros[i].horario_saida = new Date()
+
+        localStorage.clear()
+        var carHistoryNewUpdate = JSON.stringify(carros)        
+        localStorage.setItem('carros', carHistoryNewUpdate)
+
         found = true;
         toggleVisibleSucess(true);
         return true;
@@ -43,6 +68,7 @@ const Saida = () => {
     <div>
       <div> { errorVisible ? msgElementError : null } </div>
       <div> { sucessVisible ? msgElementSucess : null } </div>
+      <div> { value !== 0 ? msgElementValue : null } </div>
         <div className="form-group row d-flex justify-content-center">
           <label htmlFor="placa" className="col-md-1 col-form-labe">
             Placa
