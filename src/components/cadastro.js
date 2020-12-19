@@ -21,16 +21,18 @@ const Cadastro = () => {
     toggleVisibleSucess(false)
 
     if (verificaPlaca() && verificaNome() && verificaModelo() && verificaMarca()){
-      var objItemPlaca = document.getElementById('placa').value.toUpperCase()
-      var objItemNome = document.getElementById('nome').value
-      var objItemMarca = document.getElementById('marca').value
-      var objItemModelo = document.getElementById('modelo').value
+      var objItemPlaca = document.getElementById('placa').value.toUpperCase();
+      var objItemNome = document.getElementById('nome').value;
+      var objItemMarca = document.getElementById('marca').value;
+      var objItemModelo = document.getElementById('modelo').value;
+      var horarioEntrada = new Date();
 
       var carData = {
         placa: objItemPlaca,
         nome: objItemNome,
         marca: objItemMarca,
-        modelo: objItemModelo
+        modelo: objItemModelo,
+        horario_entrada: horarioEntrada
       }
 
       arrayData.push(carData)
