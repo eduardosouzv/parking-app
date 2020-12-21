@@ -7,7 +7,7 @@ const Saida = () => {
   const [value, setValue] = useState(0);
 
   const msgElementError = (
-    <div className="alert alert-danger col-md-6 mx-auto" role="alert">Placa não encontrada.</div>
+    <div className="alert alert-danger col-md-6 mx-auto" role="alert">Placa não encontrada dentro do estacionamento.</div>
   );
 
   const msgElementSucess = (
@@ -39,7 +39,7 @@ const Saida = () => {
     var found = false;
 
     for (let i = 0; i < carros.length; i++) {
-      if (carros[i].placa === placaBuscada) {
+      if (carros[i].placa === placaBuscada && !carros[i].horario_saida) {
         var value = calcValue(carros[i].horario_entrada)
         
         setValue(value)
