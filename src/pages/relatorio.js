@@ -4,12 +4,14 @@ import LineRelatorio from '../components/linerelatorio'
 
 const Relatorio = () =>{
 
-    
     function showData() {
         var carrosJSONstring = localStorage.getItem('carros')
         var carros = JSON.parse(carrosJSONstring);
         var elements = []
 
+        if (!carros){
+            return 
+        } else {
         for (let i = 0; i < carros.length; i++) {
             
             if(carros[i].valor_pago) {
@@ -18,6 +20,7 @@ const Relatorio = () =>{
 
         }
         return elements;
+        }
     }
 
     return (

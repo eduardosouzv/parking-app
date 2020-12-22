@@ -62,13 +62,17 @@ const Saida = () => {
     var carros = JSON.parse(carrosJSONstring);
     var elements = []
 
-    for (let i = 0; i < carros.length; i++) {
+    if (!carros){
+      return
+    } else {
+      for (let i = 0; i < carros.length; i++) {
 
-      if(!carros[i].valor_pago) {
-        elements.push(<CarsInside key={i.toString()} placa={ carros[i].placa } marca={ carros[i].marca } modelo={ carros[i].modelo } horarioEntrada={ carros[i].horario_entrada } />)
+        if(!carros[i].valor_pago) {
+          elements.push(<CarsInside key={i.toString()} placa={ carros[i].placa } marca={ carros[i].marca } modelo={ carros[i].modelo } horarioEntrada={ carros[i].horario_entrada } />)
+        }
       }
-    }
-    return elements;
+      return elements;
+    }    
   }
 
   return (
