@@ -1,22 +1,14 @@
 import React, { useState } from 'react';
 
+import ErrorMessage from '../components/errorMessage';
+import SucessMessage from '../components/sucessMessage';
+import ValueMessage from '../components/valueMessage';
+
 const Saida = () => {
 
   const [errorVisible, toggleVisibleError] = useState(false);
   const [sucessVisible, toggleVisibleSucess] = useState(false);
   const [value, setValue] = useState(0);
-
-  const msgElementError = (
-    <div className="alert alert-danger col-md-6 mx-auto" role="alert">Placa não encontrada dentro do estacionamento.</div>
-  );
-
-  const msgElementSucess = (
-    <div className="alert alert-success col-md-6 mx-auto" role="alert">Saida Registrada</div>
-  );
-
-  const msgElementValue = (
-    <div className="alert alert-secondary col-md-6 mx-auto" role="alert">Valor a ser pago : R$ {value},00</div>
-  );
 
   function calcValue(h) {
     var time = Date.parse(h);
@@ -63,13 +55,12 @@ const Saida = () => {
 
   }
 
-
   return (
     <div style={{ textAlign: "center" }}>
-      <div> { errorVisible ? msgElementError : null } </div>
-      <div> { sucessVisible ? msgElementSucess : null } </div>
-      <div> { value !== 0 ? msgElementValue : null } </div>
       <h1 className="h1">Registro de Saida via Placa</h1>
+      <div> { errorVisible ? <ErrorMessage message="Placa não encontrada dentro do estacionamento." /> : null } </div>
+      <div> { sucessVisible ? <SucessMessage message="Saida Registrada" /> : null } </div>
+      <div> { value !== 0 ? <ValueMessage message={ value } /> : null } </div>
         <div className="form-group row d-flex justify-content-center">
           <label htmlFor="placa" className="col-md-1 col-form-labe">
             Placa
