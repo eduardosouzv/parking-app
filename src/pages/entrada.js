@@ -1,17 +1,12 @@
 import React, { useState } from 'react';
 
+import ErrorMessage from '../components/errorMessage';
+import SucessMessage from '../components/sucessMessage';
+
 const Home = () => {
 
   const [errorVisible, toggleVisibleError] = useState(false);
   const [sucessVisible, toggleVisibleSucess] = useState(false);
-
-  const msgElementError = (
-    <div className="alert alert-danger col-md-6 mx-auto" role="alert">Erro no preenchimento de dados.</div>
-  );
-
-  const msgElementSucess = (
-    <div className="alert alert-success col-md-6 mx-auto" role="alert">Registrado com sucesso !</div>
-  );
 
   var arrayData = [];
 
@@ -138,8 +133,8 @@ const Home = () => {
   return (
     <div style={{ textAlign: "center" }} className="">
       <h1 className="h1">Cadastro</h1>
-      <div id="alert"> { errorVisible ? msgElementError : null }</div>
-      <div id="alert"> { sucessVisible ? msgElementSucess : null }</div>
+      <div id="alert"> { errorVisible ? <ErrorMessage message="Erro no preenchimento de dados." /> : null }</div>
+      <div id="alert"> { sucessVisible ? <SucessMessage message="Registrado com sucesso !" /> : null }</div>
         <div className="form-group row d-flex justify-content-center">
           <label htmlFor="placa" className="col-md-1 col-form-labe" >
             Placa
