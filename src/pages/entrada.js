@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Form from '../../components/cadastro'
+import Form from '../components/cadastro'
 
 const Home = () => {
     return(

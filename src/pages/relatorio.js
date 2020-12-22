@@ -1,6 +1,6 @@
 import React from 'react'
 
-import LineRelatorio from '../../components/linerelatorio'
+import LineRelatorio from '../components/linerelatorio'
 
 const Relatorio = () =>{
 

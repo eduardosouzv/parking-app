@@ -1,6 +1,6 @@
 import React from 'react';
 
-import RegistroSaida from '../../components/saida'
+import RegistroSaida from '../components/saida'
 
 const Saida = () => {
   return (

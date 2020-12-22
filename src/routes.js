@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route, BrowserRouter, Switch, Link } from 'react-router-dom';
 
-import Home from './pages/entrada/index.js';
-import Saida from './pages/saida/index.js';
-import Relatorio from './pages/relatorio/index.js';
+import Home from './pages/entrada';
+import Saida from './pages/saida';
+import Relatorio from './pages/relatorio';
 
 import './App.css'
 
