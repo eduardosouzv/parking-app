@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import ErrorMessage from '../components/errorMessage';
 import SucessMessage from '../components/sucessMessage';
 import ValueMessage from '../components/valueMessage';
+import CarsInside from '../components/carsInside';
 
 const Saida = () => {
 
@@ -55,6 +56,21 @@ const Saida = () => {
 
   }
 
+  
+  function carsInside() {
+    var carrosJSONstring = localStorage.getItem('carros')
+    var carros = JSON.parse(carrosJSONstring);
+    var elements = []
+
+    for (let i = 0; i < carros.length; i++) {
+
+      if(!carros[i].valor_pago) {
+        elements.push(<CarsInside key={i.toString()} placa={ carros[i].placa } marca={ carros[i].marca } modelo={ carros[i].modelo } horarioEntrada={ carros[i].horario_entrada } />)
+      }
+    }
+    return elements;
+  }
+
   return (
     <div style={{ textAlign: "center" }}>
       <h1 className="h1">Registro de Saida via Placa</h1>
@@ -70,6 +86,13 @@ const Saida = () => {
           </div>
         </div>
         <button type="submit" className="btn btn-primary" onClick={ () => { buscaPlaca() } } >Registrar</button>
+        <div style={{ paddingTop: "40px" }} className="container">
+          <ul className="list-group-item">
+            <h1 className="h1">Carros Estacionados Atualmente</h1>
+            {carsInside()}
+          </ul>
+        </div>
+        
     </div>
   );
 };
