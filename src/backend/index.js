@@ -1,11 +1,43 @@
 const express = require('express');
 const cors = require('cors');
-const db = require('./db_config').connect();
+const db = require('./db_config');
 const port = 3001
 
 const app = express();
 
 app.use(express.json());
 app.use(cors());
+
+app.post('/api/register', (req, res) => {
+    res.send(data = {
+        placa: req.body.placa,
+        nome: req.body.nome,
+        marca: req.body.marca,
+        modelo: req.body.modelo,
+    })
+
+    db.query('INSERT INTO carros(placa,nome,marca,modelo,horario_entrada) VALUES (?,?,?,?,NOW())',
+            [ data.placa, data.nome, data.marca, data.modelo], (error) => {
+                if (error) throw error;
+            });
+})
+
+app.get('/api/carros', (req, res) => {
+    db.query('SELECT * FROM carros', (err, rows) => {
+        if (err) throw err
+        res.send(rows)
+    })
+})
+
+app.get('/api/carros/:placa', (req, res) => {
+       
+    var placa = req.params.placa
+    db.query('SELECT * FROM carros WHERE placa = ? AND horario_saida IS NULL', placa, (err, rows) => {
+        if (err) throw error;
+        res.send(rows.length ? rows[0] : null)
+        
+    })
+
+})
 
 app.listen(port);
