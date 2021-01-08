@@ -36,6 +36,7 @@ const Home = () => {
         .then((err) => {
           console.log('error:', err);
         });
+        toggleVisibleSucess(true);
     }
   }
 
@@ -74,7 +75,7 @@ const Home = () => {
       toggleVisibleError(true);
       return false;
     }
-    toggleVisibleSucess(true);
+    
     return true;
   }
 
