@@ -32,12 +32,31 @@ app.get('/api/carros', (req, res) => {
 app.get('/api/carros/:placa', (req, res) => {
        
     var placa = req.params.placa
-    db.query('SELECT * FROM carros WHERE placa = ? AND horario_saida IS NULL', placa, (err, rows) => {
+    db.query('SELECT * FROM carros WHERE placa = ?', placa, (err, rows) => {
         if (err) throw error;
         res.send(rows.length ? rows[0] : null)
         
     })
+})
 
+    
+app.get('/api/saida/:placa', (req, res) => {
+    var placa = req.params.placa
+
+    db.query('SELECT * FROM carros WHERE placa = ? AND horario_saida IS NULL', placa , (err, rows) => {
+        if (err) throw err
+        res.send(rows.length ? rows[0] : null)
+    })
+})
+
+app.put('/api/saida/valorpago', (req, res) => {
+    var data = {
+        valor: req.body.valor_pago,
+        id: req.body.id
+    }
+    db.query('UPDATE carros SET valor_pago = ?, horario_saida = NOW() WHERE id = ?', [data.valor, data.id], (err) => {
+        if (err) throw err;
+    })
 })
 
 app.listen(port);
