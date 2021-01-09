@@ -30,12 +30,6 @@ const Home = () => {
           marca: marca,
           modelo: modelo
         })
-        .then((res) => {
-          console.log(res);
-        })
-        .then((err) => {
-          console.log('error:', err);
-        });
         toggleVisibleSucess(true);
     }
   }

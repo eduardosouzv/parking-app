@@ -17,8 +17,8 @@ app.post('/api/register', (req, res) => {
     })
 
     db.query('INSERT INTO carros(placa,nome,marca,modelo,horario_entrada) VALUES (?,?,?,?,NOW())',
-            [ data.placa, data.nome, data.marca, data.modelo], (error) => {
-                if (error) throw error;
+            [ data.placa, data.nome, data.marca, data.modelo], (err) => {
+                if (err) throw err;
             });
 })
 
@@ -56,6 +56,14 @@ app.put('/api/saida/valorpago', (req, res) => {
     }
     db.query('UPDATE carros SET valor_pago = ?, horario_saida = NOW() WHERE id = ?', [data.valor, data.id], (err) => {
         if (err) throw err;
+    })
+})
+
+app.get('/api/saida', (req, res) =>{
+
+    db.query('SELECT * FROM carros WHERE horario_saida IS NULL', (err, rows) => {
+        if(err) throw err;
+        res.send(rows.length ? rows : null)
     })
 })
 
