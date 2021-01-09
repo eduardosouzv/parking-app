@@ -1,35 +1,42 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
+import axios from 'axios';
 
 import LineRelatorio from '../components/linerelatorio'
 
 const Relatorio = () =>{
+    window.onload = showData();
 
-    function showData() {
-        var carrosJSONstring = localStorage.getItem('carros')
-        var carros = JSON.parse(carrosJSONstring);
-        var elements = []
-
-        if (!carros){
-            return 
+    async function showData() {
+        const cars = await axios.get('http://localhost:3001/api/relatorio');
+        var elements = [];
+    
+        if (!cars) {
+          return;
         } else {
-        for (let i = 0; i < carros.length; i++) {
-            
-            if(carros[i].valor_pago) {
-                elements.push(<LineRelatorio key={i.toString()} placa={ carros[i].placa } marca={ carros[i].marca } modelo={ carros[i].modelo } valor={ carros[i].valor_pago } />)
-            }
-
+          for (let i = 0; i < cars.data.length; i++) {
+            const el = React.createElement(
+                LineRelatorio,
+              {
+                key: i.toString(),
+                placa: cars.data[i].placa,
+                marca: cars.data[i].marca,
+                modelo: cars.data[i].modelo,
+                valor: cars.data[i].valor_pago,
+              }
+            );
+            elements.push(el);
+          }
+          ReactDOM.render(elements, document.getElementById('cars'));
         }
-        return elements;
-        }
-    }
+      }
 
     return (
         <div style={{ textAlign: "center" }} className="container">
 
             <ul className="list-group-item">
             <h1 className="h1">Relatorio do Dia</h1>
-            {showData()}
-
+            <div id="cars"></div>
             </ul>
 
         </div>

@@ -22,13 +22,6 @@ app.post('/api/register', (req, res) => {
             });
 })
 
-app.get('/api/carros', (req, res) => {
-    db.query('SELECT * FROM carros', (err, rows) => {
-        if (err) throw err
-        res.send(rows)
-    })
-})
-
 app.get('/api/carros/:placa', (req, res) => {
        
     var placa = req.params.placa
@@ -38,7 +31,6 @@ app.get('/api/carros/:placa', (req, res) => {
         
     })
 })
-
     
 app.get('/api/saida/:placa', (req, res) => {
     var placa = req.params.placa
@@ -63,6 +55,14 @@ app.get('/api/saida', (req, res) =>{
 
     db.query('SELECT * FROM carros WHERE horario_saida IS NULL', (err, rows) => {
         if(err) throw err;
+        res.send(rows.length ? rows : null)
+    })
+})
+
+app.get('/api/relatorio', (req, res) => {
+    
+    db.query('SELECT * FROM carros WHERE valor_pago IS NOT NULL AND horario_saida IS NOT NULL', (err, rows) => {
+        if (err) throw err;
         res.send(rows.length ? rows : null)
     })
 })
