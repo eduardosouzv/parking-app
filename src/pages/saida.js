@@ -36,7 +36,8 @@ const Saida = () => {
       axios.put('http://localhost:3001/api/saida/valorpago', {
         valor_pago: calcValue(carro.data.horario_entrada),
         id: carro.data.id
-      })
+      },
+      toggleVisibleSucess(true))
     }
     
   }
