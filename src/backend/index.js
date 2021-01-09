@@ -32,7 +32,7 @@ app.get('/api/carros', (req, res) => {
 app.get('/api/carros/:placa', (req, res) => {
        
     var placa = req.params.placa
-    db.query('SELECT * FROM carros WHERE placa = ?', placa, (err, rows) => {
+    db.query('SELECT * FROM carros WHERE horario_saida IS NULL AND placa = ?', placa, (err, rows) => {
         if (err) throw error;
         res.send(rows.length ? rows[0] : null)
         
